@@ -4,8 +4,3 @@ WORKDIR /app
 ADD package.json ./
 ADD package-lock.json ./
 RUN npm install
-
-COPY . .
-ARG NODE_ENV
-ENV NODE_ENV ${NODE_ENV}
-RUN npm run build:prod
