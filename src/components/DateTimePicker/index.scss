@@ -1,0 +1,63 @@
+/* components/DateTimePicker/index.wxss */
+.container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 101;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  padding-bottom: 100rpx;
+  background-color: #fff;
+  z-index: 102;
+  animation: show ease-in-out 0.3s;
+}
+
+.confirm {
+  color: #8553fa;
+  font-size: 32rpx;
+  width: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancel {
+  color: #abb4b1;
+  font-size: 32rpx;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100rpx;
+  padding: 0 34rpx;
+  box-sizing: border-box;
+}
+
+@keyframes show {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}

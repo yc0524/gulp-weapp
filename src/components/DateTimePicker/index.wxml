@@ -1,0 +1,39 @@
+<!-- components/DateTimePicker/index.wxml -->
+<view class="container">
+  <view
+    class="mask"
+    bind:tap="handleCancel"
+  ></view>
+  <view class="content">
+    <view class="header">
+      <view
+        class="cancel"
+        bind:tap="handleCancel"
+      >取消</view>
+      <slot></slot>
+      <view
+        class="confirm"
+        bind:tap="handleValueChange"
+      >确定</view>
+    </view>
+    <picker-view
+      indicator-style="height: 50px;"
+      style="width: 100%; height: 300px;"
+      bindchange="onTimeChange"
+      value="{{valueArray}}"
+    >
+      <picker-view-column
+        wx:for="{{rangeValues}}"
+        wx:key="rdx"
+        wx:for-item="rangeValue"
+        wx:for-index="rdx"
+      >
+        <view
+          wx:for="{{rangeValue}}"
+          wx:key="{{index}}"
+          style="line-height: 50px; text-align: center;"
+        >{{item}}</view>
+      </picker-view-column>
+    </picker-view>
+  </view>
+</view>

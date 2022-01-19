@@ -1,0 +1,47 @@
+{
+  "pages": ["pages/index/index", "pages/device/index"],
+
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "backgroundColor": "#f8f8f7",
+    "backgroundColorTop": "#f8f8f7",
+    "backgroundColorBottom": "#f8f8f7",
+
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom",
+    "initialRenderingCache": "static"
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "useExtendedLib": {
+    "weui": true
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "咪哒点播请求获取您的位置信息"
+    }
+  },
+  "plugins": {},
+  "usingComponents": {},
+  "tabBar": {
+    "color": "#787A8A",
+    "selectedColor": "#63BFAA",
+    "backgroundColor": "#fff",
+    "borderStyle": "white",
+    "custom": false,
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "发现"
+      },
+      {
+        "pagePath": "pages/device/index",
+        "text": "设备"
+      }
+    ]
+  },
+  "debug": false
+}
