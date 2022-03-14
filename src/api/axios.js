@@ -1,14 +1,7 @@
-/*
- * @Description:
- * @Author: YanCheng
- * @Date: 2022-01-12 14:26:19
- * @LastEditTime: 2022-01-12 17:42:23
- */
 import userStore from "@store/userStore";
 import { getCurPageRoute, sleep } from "@utils/util";
-import { request } from "miniprogram-ci/dist/@types/utils/request";
 
-const API_URL = "/* @echo API_URL */";
+// const API_URL = "/* @echo API_URL */";
 
 let timerMap = new Map();
 let requestId = 0;
@@ -30,9 +23,9 @@ let wxRequestPromise = function (params, requestId) {
       ...header,
     };
 
-    if (!/^http|https/.test(params.url)) {
-      params.url = API_URL + params.url;
-    }
+    // if (!/^http|https/.test(params.url)) {
+    //   params.url = API_URL + params.url;
+    // }
 
     let requestTask = wx.request({
       ...params,
@@ -60,7 +53,6 @@ const requestFunc = function ({ url, method, data = {}, header = {} }) {
     }, 2000);
 
     timerMap.set(requestFlg, timer);
-
     let resultParams = {
       url,
       method,
@@ -98,9 +90,6 @@ const requestFunc = function ({ url, method, data = {}, header = {} }) {
               icon: "none",
               title: "请登录",
             });
-            // wx.navigateTo({
-            //   url: "/subPage/userLogin/login/login",
-            // });
             throw new Error(`刷新token失败，请检查获取token接口`);
           }
         }
@@ -108,14 +97,11 @@ const requestFunc = function ({ url, method, data = {}, header = {} }) {
         // 当刷新token成功后 重新发送业务请求
         requestResult = wxRequestPromise(resultParams);
       }
-
-      resolve(requestResult.data);
-    } catch (error) {
+      // 删掉timer
       if (timerMap.has(requestFlg)) {
         let timer2 = timerMap.get(requestFlg);
         clearTimeout(timer2);
         timerMap.delete(requestFlg);
-
         if (timerMap.size == 0) {
           if (isShowLoading) {
             isShowLoading = false;
@@ -123,7 +109,19 @@ const requestFunc = function ({ url, method, data = {}, header = {} }) {
           }
         }
       }
-
+      resolve(requestResult.data);
+    } catch (error) {
+      if (timerMap.has(requestFlg)) {
+        let timer2 = timerMap.get(requestFlg);
+        clearTimeout(timer2);
+        timerMap.delete(requestFlg);
+        if (timerMap.size == 0) {
+          if (isShowLoading) {
+            isShowLoading = false;
+            wx.hideLoading();
+          }
+        }
+      }
       // 判断是否超时
       if (error.errMsg) {
         wx.getNetworkType({
@@ -148,19 +146,6 @@ const requestFunc = function ({ url, method, data = {}, header = {} }) {
         });
       } else {
         resolve(requestResult.data);
-      }
-
-      // 处理timermap
-      if (timerMap.has(requestFlag)) {
-        let timer2 = timerMap.get(requestFlag);
-        clearTimeout(timer2);
-        timerMap.delete(requestFlag);
-        if (timerMap.size == 0) {
-          if (isShowLoading) {
-            isShowLoading = false;
-            wx.hideLoading();
-          }
-        }
       }
     }
   });

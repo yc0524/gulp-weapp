@@ -1,13 +1,21 @@
 {
-  "pages": ["pages/index/index", "pages/device/index"],
-
+  "pages": [
+    "pages/index/index",
+    "pages/discover/index",
+    "pages/mine/index"
+  ],
+  "subPackages": [{
+    "root": "userPages",
+    "pages": [
+      "pages/login/index"
+    ]
+  }],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "backgroundColor": "#f8f8f7",
     "backgroundColorTop": "#f8f8f7",
     "backgroundColorBottom": "#f8f8f7",
-
     "navigationBarTextStyle": "black",
     "navigationStyle": "custom",
     "initialRenderingCache": "static"
@@ -21,25 +29,43 @@
   },
   "permission": {
     "scope.userLocation": {
-      "desc": "咪哒点播请求获取您的位置信息"
+      "desc": "咪哒请求获取您的位置信息"
     }
   },
-  "plugins": {},
+  "plugins": {
+    "tencentvideo": {
+      "version": "2.0.0",
+      "provider": "wxa75efa648b60994b"
+    },
+    "video-plugin": {
+      "version": "1.0.13",
+      "provider": "wx8d04ad0492dab24d"
+    }
+  },
   "usingComponents": {},
   "tabBar": {
+    "custom": true,
     "color": "#787A8A",
     "selectedColor": "#63BFAA",
     "backgroundColor": "#fff",
     "borderStyle": "white",
-    "custom": false,
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/index/index",
-        "text": "发现"
+        "iconPath": "/public/tabbar/home.png",
+        "selectedIconPath": "/public/tabbar/home_active.png",
+        "text": "首页"
       },
       {
-        "pagePath": "pages/device/index",
-        "text": "设备"
+        "pagePath": "pages/discover/index",
+        "iconPath": "/public/tabbar/discover.png",
+        "selectedIconPath": "/public/tabbar/discover_active.png",
+        "text": "广场"
+      },
+      {
+        "pagePath": "pages/mine/index",
+        "iconPath": "/public/tabbar/mine.png",
+        "selectedIconPath": "/public/tabbar/mine_active.png",
+        "text": "我的"
       }
     ]
   },

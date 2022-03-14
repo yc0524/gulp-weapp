@@ -101,7 +101,6 @@ class UserStore {
     if (this.isBindUserInfo && !this.isBindUserPhone) {
       return "step2";
     }
-
     return "step3";
   }
 
@@ -126,7 +125,7 @@ class UserStore {
     let userTokenFromStorageStr;
     try {
       let storageResult = yield wx.getStorage({
-        key: "usertoken",
+        key: "userToken",
       });
       userTokenFromStorageStr = storageResult.errMsg.includes("getStorage:ok")
         ? storageResult.data
@@ -150,7 +149,7 @@ class UserStore {
       } else {
         // 不使用缓存，并同步销毁
         yield wx.removeStorage({
-          key: "usertoken",
+          key: "userToken",
         });
       }
     }
@@ -179,7 +178,7 @@ class UserStore {
       timestamp: parseInt(Date.now() / 1000),
     };
     wx.setStorage({
-      key: "usertoken",
+      key: "userToken",
       data: JSON.stringify(userTokenStorage),
     });
   }
@@ -265,6 +264,63 @@ class UserStore {
     }
   });
 
+  // 获取用户基础信息
+  getUserInfo = flow(function* (canUseCache = true) {
+
+    // 判断是否使用缓存token
+    // let userInfoFromStoageStr
+    // if (canUseCache) {
+    //   try {
+    //     let storageResult = yield wx.getStorage({
+    //       key: "userInfo"
+    //     })
+    //     userInfoFromStoageStr = storageResult.errMsg.includes("getStorage:ok") ? storageResult.data : ''
+    //   } catch (e) {
+    //     userInfoFromStoageStr = ""
+    //   }
+
+    //   if (userInfoFromStoageStr) {
+    //     console.log("使用userInfo缓存")
+    //     let userInfoFromStoageJSON = JSON.parse(userInfoFromStoageStr)
+    //     this.userSettingInfo = {
+    //       ...userInfoFromStoageJSON
+    //     }
+    //     if (userInfoFromStoageJSON.uid) {
+    //       this.isGetUserInfoFromRequest = true
+    //     }
+    //   }
+    // }
+
+
+    // const {
+    //   data,
+    //   status,
+    //   msg
+    // } = yield getUserInfo();
+    // if (status === 0) {
+
+
+    //   if (data.uid != this.userSettingInfo.uid && this.userSettingInfo.uid) {
+    //     wx.nextTick(() => {
+    //       eventBus.emit('uidChange')
+    //     })
+    //   }
+
+    //   this.userSettingInfo = {
+    //     uid: data.uid,
+    //     avatar_uri: data.avatar_uri,
+    //     phone: data.phone,
+    //     nick_name: data.nick_name,
+    //     birthday: data.birthday,
+    //     sex: data.sex,
+    //     customer_contact: data.customer_contact,
+    //   }
+
+    //   this.isGetUserInfoFromRequest = true
+    //   // 将用户信息保存到缓存
+    //   this.setUserInfoInStorage(this.userSettingInfo)
+    // }
+  })
   // 缓存用户基础数据
   setUserInfoInStorage({
     uid,
@@ -339,55 +395,7 @@ class UserStore {
 
 const userStore = new UserStore();
 
-export function checkUserRegisterDecorator(tag, name, descriptor) {
-  let func;
-  if (descriptor.initializer) {
-    func = descriptor.initializer();
-    descriptor.initializer = function () {
-      return function (...args) {
-        if (!userStore.isUserRegisterFinished) {
-          wx.navigateTo({
-            url: "/pages/login/lindex",
-          });
 
-          wx.showToast({
-            icon: "none",
-            title: "请登录",
-          });
-
-          return {
-            status: 1,
-            msg: "请登录",
-          };
-        }
-
-        return func.apply(this, args);
-      };
-    };
-  } else if (descriptor.value) {
-    if (typeof func == "function") {
-      descriptor.value = function (...args) {
-        if (!userStore.isUserRegisterFinished) {
-          wx.navigateTo({
-            url: "/pages/login/lindex",
-          });
-
-          wx.showToast({
-            icon: "none",
-            title: "请登录",
-          });
-
-          return {
-            status: 1,
-            msg: "请登录",
-          };
-        }
-
-        return func.apply(this, args);
-      };
-    }
-  }
-}
 
 // 监听用户信息是否发生变化 当发生修改的话 保存到缓存
 reaction(
@@ -401,4 +409,4 @@ reaction(
   }
 );
 
-export default UserStore;
+export default userStore;

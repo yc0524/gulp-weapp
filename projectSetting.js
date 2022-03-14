@@ -11,69 +11,47 @@
 
 module.exports = {
   mock: {
-    QQ_MAP_KEY: "2GQBZ-RHJ6P-24BDL-LWRP3-BWH6H-FQBQT",
-    QQ_MAP_SK: "C5YzO04BU0fnwy1aHQ7Jw0TCBoxaXmKm",
-    API_URL: "http://8.134.14.57/rap2/app/mock/1/",
-    AUTH_URL: "http://8.134.14.57/rap2/app/mock/1/",
-    CLIENT_ID: "10047",
-    CLIENT_SECRET:
-      "7u1JVl1kpLSTub9VjMM8Qa3qbWi4ot8aplHUtVL20IYXYk4YgqoWi1EWrAyY4XWW",
-    WS_URL: "wss://medasing-pre.singworld.cn",
-
-    E5_BASE_PATH: "https://uc-pro.singworld.cn",
-    E5_BIND_PATH: "https://auth-pro.singworld.cn",
-    E5_LOGIN_PATH: "https://e5box-pro.singworld.cn",
-    PRELOAD_TOKEN: "x_aam_dev__test",
+    CLIENT_ID: "10226",
+    CLIENT_SECRET: "XrtzhwuSAd6heDZ0tHBxFq6Pysq3N267L1vqkgnBsUje9FqBZonjaaWDcXMm8biA",
+    AUTH_SERVICE: 'http://auth2.aam.test', // 认证服务
+    USER_SERVICE: 'http://user.aam.test', // 用户中心服务
+    MINI_SERVICE: '', // 咪哒主要业务服务
+    OMS_SERVICE: 'http://oms-back-end-outside.aam.test', // 资源位服务
+    QI_NIU_DOMAIN: 'https://upload-z2.qiniup.com', // 七牛上传服务
+    QI_NIU_TOKEN_URL: 'http://oms-token.aam.test', // 获取七牛token服务
+    ENV: 'mock',
   },
   dev: {
-    QQ_MAP_KEY: "RGLBZ-UTOC3-VOO3L-Y2F4T-SSAU3-T6FI3",
-    QQ_MAP_SK: "5D0TYsmFMprWVINVhgft6ncRTL7UBenn",
-    API_URL: "http://medasing.aam.test",
-    AUTH_URL: "http://auth2.aam.test",
-    CLIENT_ID: "10209",
-    CLIENT_SECRET:
-      "v8a8Do97LqflNxPceenYE2KGguY7zyVQZjYsXionzg35634M8wGOXt9tmuQ0q2wd",
-    WS_URL: "ws://medasing.aam.test",
-
-    E5_BASE_PATH: "http://user-test.singworld.net",
-    E5_BIND_PATH: "http://auth-test.singworld.net",
-    E5_LOGIN_PATH: "http://e5box-server.aam.test",
-
-    BIG_DATA_PATH: "https://10.0.2.39:8181",
-    PRELOAD_TOKEN: "x_aam_dev__test",
+    CLIENT_ID: "10226",
+    CLIENT_SECRET: "XrtzhwuSAd6heDZ0tHBxFq6Pysq3N267L1vqkgnBsUje9FqBZonjaaWDcXMm8biA",
+    AUTH_SERVICE: 'http://auth2.aam.test', // 认证服务
+    USER_SERVICE: 'http://user.aam.test', // 用户中心服务
+    MINI_SERVICE: '', // 咪哒主要业务服务
+    OMS_SERVICE: 'http://oms-back-end-outside.aam.test', // 资源位服务
+    QI_NIU_DOMAIN: 'https://upload-z2.qiniup.com', // 七牛上传服务
+    QI_NIU_TOKEN_URL: 'http://oms-token.aam.test', // 获取七牛token服务
+    ENV: 'dev',
   },
   prev: {
-    QQ_MAP_KEY: "2GQBZ-RHJ6P-24BDL-LWRP3-BWH6H-FQBQT",
-    QQ_MAP_SK: "C5YzO04BU0fnwy1aHQ7Jw0TCBoxaXmKm",
-    API_URL: "https://medasing-pre.singworld.cn",
-    AUTH_URL: "https://auth.singworld.cn",
-    CLIENT_ID: "10047",
-    CLIENT_SECRET:
-      "7u1JVl1kpLSTub9VjMM8Qa3qbWi4ot8aplHUtVL20IYXYk4YgqoWi1EWrAyY4XWW",
-    WS_URL: "wss://medasing-pre.singworld.cn",
-
-    E5_BASE_PATH: "https://uc-api.singworld.cn",
-    E5_BIND_PATH: "https://auth.singworld.cn",
-    E5_LOGIN_PATH: "https://e5box-pre.singworld.cn",
-
-    BIG_DATA_PATH: "https://bigdata-collector.singworld.net",
-    PRELOAD_TOKEN: "x_aam_dev__pre",
+    CLIENT_ID: "10058",
+    CLIENT_SECRET: "StOfGOILa0u1wXnEw1GDGuvdSewj77Ax7Tlfj84Qyu6uRn8CTECWzT5s4ZJHd0Tx",
+    AUTH_SERVICE: 'https://auth.singworld.cn', // 认证服务
+    USER_SERVICE: 'https://uc-api.singworld.cn', // 用户中心服务
+    MINI_SERVICE: '', // 咪哒主要业务服务
+    OMS_SERVICE: 'https://oms-back-end-outside.singworld.cn', // 资源位服务
+    QI_NIU_DOMAIN: 'https://upload-z2.qiniup.com', // 七牛上传服务
+    QI_NIU_TOKEN_URL: 'https://oms-token-pro.singworld.cn', // 获取七牛token服务
+    ENV: 'pre',
   },
   prod: {
-    QQ_MAP_KEY: "2GQBZ-RHJ6P-24BDL-LWRP3-BWH6H-FQBQT",
-    QQ_MAP_SK: "C5YzO04BU0fnwy1aHQ7Jw0TCBoxaXmKm",
-    API_URL: "https://medasing-pro.singworld.cn",
-    AUTH_URL: "https://auth-pro.singworld.cn",
-    CLIENT_ID: "10035",
-    CLIENT_SECRET:
-      "VIJSWAwpTsvYjsJi2gNszTnCmoy8WsTIcAWqBYvC9wJn3ivAfXXq5pC2k8wx2psq",
-    WS_URL: "wss://medasing-pro.singworld.cn",
-
-    E5_BASE_PATH: "https://uc-pro.singworld.cn",
-    E5_BIND_PATH: "https://auth-pro.singworld.cn",
-    E5_LOGIN_PATH: "https://e5box-pro.singworld.cn",
-
-    BIG_DATA_PATH: "https://bigdata-collector.singworld.cn",
-    PRELOAD_TOKEN: "x_aam_dev__pro",
+    CLIENT_ID: "10226",
+    CLIENT_SECRET: "XrtzhwuSAd6heDZ0tHBxFq6Pysq3N267L1vqkgnBsUje9FqBZonjaaWDcXMm8biA",
+    AUTH_SERVICE: 'https://auth-pro.singworld.cn', // 认证服务
+    USER_SERVICE: 'https://uc-pro.singworld.cn', // 用户中心服务
+    MINI_SERVICE: '', // 咪哒主要业务服务
+    OMS_SERVICE: 'https://oms-pro-back-end-outside.singworld.cn', // 资源位服务
+    QI_NIU_DOMAIN: 'https://upload-z2.qiniup.com', // 七牛上传服务
+    QI_NIU_TOKEN_URL: 'https://oms-token-pro.singworld.cn', // 获取七牛token服务
+    ENV: 'production',
   },
 };

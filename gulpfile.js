@@ -2,7 +2,7 @@
  * @Description:
  * @Author: YanCheng
  * @Date: 2022-01-05 14:10:23
- * @LastEditTime: 2022-01-12 10:27:39
+ * @LastEditTime: 2022-03-14 14:28:27
  */
 const { src, dest, series, parallel, watch } = require("gulp");
 let path = require("path");
@@ -52,7 +52,7 @@ let filePath = {
 const aliasConfig = {
   "@components": path.resolve(__dirname, "./", "src/components"),
   "@pages": path.resolve(__dirname, "./", "src/pages"),
-  "@utils": path.resolve(__dirname, "./", "src/pages"),
+  "@utils": path.resolve(__dirname, "./", "src/utils"),
   "@styles": path.resolve(__dirname, "./", "src/styles"),
   "@api": path.resolve(__dirname, "./", "src/api"),
   "@store": path.resolve(__dirname, "./", "src/store"),

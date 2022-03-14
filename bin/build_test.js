@@ -9,10 +9,10 @@ const path = require("path");
 let { wxVersion: version, wxDesc: desc } = require("../package.json").wx;
 
 let projectPath = path.join(__dirname, "../dist2");
-let keyPath = path.join(__dirname, "../keys/private.wx82f0af7aebabaace.key");
+let keyPath = path.join(__dirname, "../keys/private.wx689a4b8fe3fccc63.key");
 
 const project = new ci.Project({
-  appid: "wx82f0af7aebabaace",
+  appid: "wx689a4b8fe3fccc63",
   type: "miniProgram",
   projectPath: projectPath,
   privateKeyPath: keyPath,

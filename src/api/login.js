@@ -6,7 +6,7 @@
  */
 import { get, post } from "./axios";
 
-const AUTH_URL = "/* @echo AUTH_URL */";
+const AUTH_SERVICE = "/* @echo AUTH_SERVICE */";
 const CLIENT_ID = "/* @echo CLIENT_ID */";
 const CLIENT_SECRET = "/* @echo CLIENT_SECRET */";
 
@@ -15,7 +15,7 @@ const CLIENT_SECRET = "/* @echo CLIENT_SECRET */";
  * @param {String} code 绑定微信用户信息
  */
 export function getProfile({ encryptedData = "", iv = "" }) {
-  const url = `${AUTH_URL}/api/miniprogram/profile`;
+  const url = `${AUTH_SERVICE}/api/miniprogram/profile`;
   const data = {
     encrypted_data: encryptedData,
     iv: iv,
@@ -33,11 +33,11 @@ export function getProfile({ encryptedData = "", iv = "" }) {
  */
 
 export const getToken = (code) => {
-  const url = `${AUTH_URL}/connect/token`;
+  const url = `${AUTH_SERVICE}/connect/token`;
   const data = {
     client_id: CLIENT_ID,
     client_secret: CLIENT_SECRET,
-    grand_type: "miniprogram",
+    grant_type: "miniprogram",
     code,
   };
   return post(url, data, {
@@ -52,7 +52,7 @@ export const getToken = (code) => {
  */
 
 export function refreshToken({ refresh_token }) {
-  const url = `${AUTH_URL}/connect/token`;
+  const url = `${AUTH_SERVICE}/connect/token`;
   const data = {
     client_id: CLIENT_ID,
     client_secret: CLIENT_SECRET,
@@ -69,6 +69,6 @@ export function refreshToken({ refresh_token }) {
  * @desc 绑定手机号
  */
 export function bindPhone(data) {
-  const url = `${AUTH_URL}/bind/phone/miniprogram`;
+  const url = `${AUTH_SERVICE}/bind/phone/miniprogram`;
   return post(url, data);
 }
