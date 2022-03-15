@@ -142,10 +142,12 @@ class UserStore {
         userTokenFromStorageJSON.timestamp;
 
       // 对比缓存时间戳，距离token失效前2小时，不采用缓存token，并销毁缓存
-      if (tokenEfficientFromStorage - now > 7200) {
+      // 测试环境 expires_in小于7200， 先把过期时间判断位1个小时
+      if (tokenEfficientFromStorage - now > 3600) {
         // 使用缓存
         this.token = userTokenFromStorageJSON.token;
         this.refresh_token = userTokenFromStorageJSON.refresh_token;
+        return
       } else {
         // 不使用缓存，并同步销毁
         yield wx.removeStorage({
@@ -169,18 +171,18 @@ class UserStore {
   });
 
   // 将token缓存到storage
-  setUserTokenInStorage({ token, refresh_token, expires_in, token_type }) {
+  setUserTokenInStorage() {
     let userTokenStorage = {
-      token,
-      refresh_token,
-      expires_in,
-      token_type,
+      token: this.token,
+      refresh_token: this.refresh_token,
+      expires_in: this.expires_in,
+      token_type: this.token_type,
       timestamp: parseInt(Date.now() / 1000),
-    };
+    }
     wx.setStorage({
       key: "userToken",
-      data: JSON.stringify(userTokenStorage),
-    });
+      data: JSON.stringify(userTokenStorage)
+    })
   }
 
   // 刷新token
@@ -195,13 +197,7 @@ class UserStore {
         this.expires_in = result.expires_in;
         this.token_type = result.token_type;
 
-        this.setUserTokenInStorage({
-          token: result.access_token,
-          refresh_token: result.refresh_token,
-          expires_in: result.expires_in,
-          token_type: result.token_type,
-        });
-
+        this.setUserTokenInStorage();
         cb && cb(result.access_token);
         return true;
       } else {
@@ -408,5 +404,17 @@ reaction(
     delay: 0,
   }
 );
+
+reaction(
+  () => toJS(userStore.token),
+  (data) => {
+    if (data) {
+      userStore.setUserTokenInStorage()
+    }
+  },
+  {
+    delay: 200
+  }
+)
 
 export default userStore;
